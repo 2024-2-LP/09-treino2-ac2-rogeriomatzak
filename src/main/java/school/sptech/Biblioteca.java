@@ -68,6 +68,29 @@ public class Biblioteca {
         return resultado;
     }
 
+    public List<Livro> retornarTopCincoLivros() {
+        List<Livro> topLivros = new ArrayList<>();
+        List<Livro> copiaLivros = new ArrayList<>(livros);
+
+
+        while (topLivros.size() < 5 && !copiaLivros.isEmpty()) {
+            Livro melhorLivro = null;
+
+            for (Livro livroAtual : copiaLivros) {
+
+                if (melhorLivro == null || livroAtual.calcularMediaAvaliacoes() > melhorLivro.calcularMediaAvaliacoes()) {
+                    melhorLivro = livroAtual;
+                }
+            }
+            if (melhorLivro != null) {
+                topLivros.add(melhorLivro);
+                copiaLivros.remove(melhorLivro);
+            }
+        }
+
+        return topLivros;
+    }
+
 
     public String getNome() {
         return nome;
